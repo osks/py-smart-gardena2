@@ -31,15 +31,15 @@ tests_require = ["pytest>=3.6", "coverage", "pytest-cov", "requests_mock"]
 
 
 setuptools.setup(
-    name="py-smart-gardena",
+    name="py-smart-gardena2",
     version=get_git_version(),
-    author="Jérémie Klein",
-    author_email="grm.klein@gmail.com",
+    author="Oskar Skoog",
+    author_email="oskar@osd.se",
     description="This library aims to provide python way to communicate "
     "with gardena smart gateway and all smart gardena systems.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/grm/py-smart-gardena",
+    url="https://github.com/osks/py-smart-gardena2",
     packages=setuptools.find_packages("src"),
     package_dir={"": "src"},
     install_requires=["requests", "oauthlib", "requests_oauthlib", "websocket-client"],

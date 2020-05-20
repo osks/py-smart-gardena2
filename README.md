@@ -1,16 +1,16 @@
-# py-smart-gardena
+# py-smart-gardena2
+
+This is a fork of https://github.com/grm/py-smart-gardena/ which was done because it was inactive.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PyPI version](https://badge.fury.io/py/py-smart-gardena.svg)](https://badge.fury.io/py/py-smart-gardena)
-[![Build Status](https://travis-ci.org/grm/py-smart-gardena.svg?branch=master)](https://travis-ci.org/grm/py-smart-gardena)
-[![Python 3](https://pyup.io/repos/github/grm/py-smart-gardena/python-3-shield.svg)](https://pyup.io/repos/github/grm/py-smart-gardena/)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/057e00063e8848e9b8a17ba892552e9f)](https://www.codacy.com/app/grm/py-smart-gardena?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=grm/py-smart-gardena&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/057e00063e8848e9b8a17ba892552e9f)](https://www.codacy.com/app/grm/py-smart-gardena?utm_source=github.com&utm_medium=referral&utm_content=grm/py-smart-gardena&utm_campaign=Badge_Coverage)
-[![Updates](https://pyup.io/repos/github/grm/py-smart-gardena/shield.svg)](https://pyup.io/repos/github/grm/py-smart-gardena/)
-[![Known Vulnerabilities](https://snyk.io/test/github/grm/py-smart-gardena/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/grm/py-smart-gardena?targetFile=requirements.txt)
+[![PyPI version](https://badge.fury.io/py/py-smart-gardena2.svg)](https://badge.fury.io/py/py-smart-gardena2)
+[![Build Status](https://travis-ci.org/osks/py-smart-gardena2.svg?branch=master)](https://travis-ci.org/osks/py-smart-gardena2)
+[![Python 3](https://pyup.io/repos/github/osks/py-smart-gardena2/python-3-shield.svg)](https://pyup.io/repos/github/osks/py-smart-gardena2/)
+[![Updates](https://pyup.io/repos/github/osks/py-smart-gardena2/shield.svg)](https://pyup.io/repos/github/osks/py-smart-gardena2/)
+[![Known Vulnerabilities](https://snyk.io/test/github/osks/py-smart-gardena2/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/osks/py-smart-gardena2?targetFile=requirements.txt)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
-[![Downloads](https://pepy.tech/badge/py-smart-gardena)](https://pepy.tech/project/py-smart-gardena)
+[![Downloads](https://pepy.tech/badge/py-smart-gardena2)](https://pepy.tech/project/py-smart-gardena2)
 
 ## Description
 
@@ -18,34 +18,13 @@ This library aims to provide python way to communicate with gardena smart system
 all gardena smart equipments. Configuration of the equipement and inclusion has still
  to be done using the Gardena application or website.
 
-## Support
-
-**This project needs your support.**  
-Gardena equipments are expensive, and I need to buy them in order to add support.
-If you find this library useful and want to help me support more devices (or if you
-just want to reward me for my spent time), you are very welcome !   
-Your help is very much appreciated.
-
-Here are the links if you want to show your support :  
-<span class="badge-paypal"><a href="https://paypal.me/grmklein" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
-
-You can also send me crypto using one of the following addresses :
-
-Bitcoin (BTC) : 15k9HW17MU6JSTZZkbQ3YNxEtYF5yhBgNR
-
-Ethereum (ETH) : 0x67afa7dc3882821e21f68e5ccd98f5c74b24295f
-
-MONERO (XMR) : 4AyVQ9HEuphJiHHgnA7BwiPSAwgodzGtqGnyD7qbxqGta3UZJk7JNcx4VMaSmL6Sn5W8b14tyPzXmQAjZGK9jc89PWpYWxy
-
-Thx for your support !
-
 ## Requirements
 
 *   **Python 3.6+**
 
 ## Supported devices
 
-For now, only few devices are supported. I may add new ones in the future :  
+For now, only few devices are supported. I may add new ones in the future :
 *   Gateway
 *   Smart Mower
 *   Smart water control
@@ -61,7 +40,7 @@ You can find how to create such an account and application here : <a href="https
 ## Installation
 
 ```sh
-$ pip install py-smart-gardena
+$ pip install py-smart-gardena2
 ```
 
 ## Usage
