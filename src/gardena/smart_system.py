@@ -140,9 +140,12 @@ class SmartSystem:
     def __response_has_errors(self, response):
         if response.status_code not in (200, 202):
             r = response.json()
-            self.logger.error(
-                f"{response.status_code} : {r['errors'][0]['title']} - {r['errors'][0]['detail']}"
-            )
+            if 'errors' in r:
+                self.logger.error(
+                    f"{response.status_code} : {r['errors'][0]['title']} - {r['errors'][0]['detail']}"
+                )
+            else:
+                self.logger.error(f"{response.status_code} : {r}")
             return True
         return False
 
