@@ -58,12 +58,13 @@ and two connections to revoke tokens, everything else is done through websockets
 
 ### Authentication
 
-You first need to get a client id for your personal installation of gardena.
-To do so, create an account here : https://developer.1689.cloud/apis
+You first need to get a client id (also called application key in the
+API documentation) for your personal installation of gardena.  To do
+so, create an account here : https://developer.1689.cloud/apis
 
-Then you need to create an application, add APIs and get the
-application key (also called client id) as explained here:
-https://developer.1689.cloud/docs/getting-started
+Then you need to create an application, add APIs (Authentication API
+and GARDENA smart system API), and copy the application key as
+explained here: https://developer.1689.cloud/docs/getting-started
 
 The library manages the token for you then.
 An exception is raised if authentication fails.
