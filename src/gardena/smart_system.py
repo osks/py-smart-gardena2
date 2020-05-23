@@ -12,11 +12,12 @@ from gardena.location import Location
 from gardena.devices.device_factory import DeviceFactory
 
 
+_LOGGER = logging.getLogger(__name__)
+
+
 class Client:
-    def __init__(self, smart_system=None, level=logging.WARN, location=None):
+    def __init__(self, smart_system=None, location=None):
         self.smart_system = smart_system
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(level)
         self.live = False
         self.location = location
         self.should_stop = False
@@ -25,20 +26,20 @@ class Client:
         self.smart_system.on_message(message)
 
     def on_error(self, error):
-        self.logger.error(f"error : {error}")
+        _LOGGER.error(f"error : {error}")
 
     def is_connected(self):
         return self.live
 
     def on_close(self):
         self.live = False
-        self.logger.info("Connection close to gardena API")
+        _LOGGER.info("Connection close to gardena API")
         if not self.should_stop:
-            self.logger.info("Restarting websocket")
+            _LOGGER.info("Restarting websocket")
             self.smart_system.start_ws(self.location)
 
     def on_open(self):
-        self.logger.info("Connected to Gardena API")
+        _LOGGER.info("Connected to Gardena API")
         self.live = True
 
         # def run(*args):
@@ -51,20 +52,18 @@ class Client:
 class SmartSystem:
     """Base class to communicate with gardena and handle network calls"""
 
-    def __init__(self, email=None, password=None, client_id=None, level=logging.INFO):
+    def __init__(self, email=None, password=None, client_id=None):
         """Constructor, create instance of gateway"""
         if email is None or password is None or client_id is None:
             raise ValueError(
                 "Arguments 'email', 'passwords' and 'client_id' are required"
             )
-        logging.basicConfig(level=level)
         self.AUTHENTICATION_HOST = "https://api.authentication.husqvarnagroup.dev"
         self.SMART_HOST = "https://api.smart.gardena.dev"
         self.email = email
         self.password = password
         self.client_id = client_id
         self.locations = {}
-        self.level = level
         self.client = None
         self.oauth_session = None
         self.supported_services = [
@@ -76,8 +75,6 @@ class SmartSystem:
             "POWER_SOCKET",
             "DEVICE",
         ]
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(level)
 
     def create_header(self, include_json=False):
         headers = {"Authorization-Provider": "husqvarna", "X-Api-Key": self.client_id}
@@ -141,11 +138,11 @@ class SmartSystem:
         if response.status_code not in (200, 202):
             r = response.json()
             if 'errors' in r:
-                self.logger.error(
+                _LOGGER.error(
                     f"{response.status_code} : {r['errors'][0]['title']} - {r['errors'][0]['detail']}"
                 )
             else:
-                self.logger.error(f"{response.status_code} : {r}")
+                _LOGGER.error(f"{response.status_code} : {r}")
             return True
         return False
 
@@ -158,7 +155,7 @@ class SmartSystem:
     def update_locations(self):
         response_data = self.__call_smart_system_get(f"{self.SMART_HOST}/v1/locations")
         if len(response_data["data"]) < 1:
-            self.logger.error("No location found....")
+            _LOGGER.error("No location found....")
         else:
             self.locations = {}
             for location in response_data["data"]:
@@ -171,7 +168,7 @@ class SmartSystem:
             f"{self.SMART_HOST}/v1/locations/{location.id}"
         )
         if len(response_data["data"]["relationships"]["devices"]["data"]) < 1:
-            self.logger.error("No device found....")
+            _LOGGER.error("No device found....")
         else:
             devices_smart_system = {}
             for device in response_data["included"]:
@@ -204,7 +201,7 @@ class SmartSystem:
         response = r.json()
         ws_url = response["data"]["attributes"]["url"]
         if self.client is None:
-            self.client = Client(self, level=self.level, location=location)
+            self.client = Client(self, location=location)
         self.ws = websocket.WebSocketApp(
             ws_url,
             on_message=self.client.on_message,
@@ -219,22 +216,22 @@ class SmartSystem:
         wst.start()
 
     def on_message(self, message):
-        self.logger.debug("------- Beginning of message ---------")
-        self.logger.debug(message)
+        _LOGGER.debug("------- Beginning of message ---------")
+        _LOGGER.debug(message)
         data = json.loads(message)
-        self.logger.info(f'Received {data["type"]} message')
+        _LOGGER.info(f'Received {data["type"]} message')
         if data["type"] == "LOCATION":
-            self.logger.debug(">>>>>>>>>>>>> Found LOCATION")
+            _LOGGER.debug(">>>>>>>>>>>>> Found LOCATION")
             self.parse_location(data)
         elif data["type"] in self.supported_services:
             self.parse_device(data)
         else:
-            self.logger.debug(">>>>>>>>>>>>> Unkonwn Message")
-        self.logger.debug("------- End of message ---------")
+            _LOGGER.debug(">>>>>>>>>>>>> Unknown Message")
+        _LOGGER.debug("------- End of message ---------")
 
     def parse_location(self, location):
         if location["id"] not in self.locations:
-            self.logger.debug(f"Location not found : {location['attributes']['name']}")
+            _LOGGER.debug(f"Location not found : {location['attributes']['name']}")
         self.locations[location["id"]].update_location_data(location)
 
     def parse_device(self, device):
