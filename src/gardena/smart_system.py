@@ -121,6 +121,7 @@ class SmartSystem:
         self.token = token
 
     def call_smart_system_service(self, service_id, data):
+        _LOGGER.debug(f"Calling smart system service_id: '{service_id}' with data: '{data}'")
         args = {"data": data}
         headers = self.create_header(True)
 
