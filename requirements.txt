@@ -11,4 +11,4 @@ oauthlib==3.2.2
 requests-oauthlib==2.0.0
 requests==2.32.2
 urllib3==2.2.1           # via requests
-websocket-client==0.57.0
+websocket-client==1.8.0
