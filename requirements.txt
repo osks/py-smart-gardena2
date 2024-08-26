@@ -10,5 +10,5 @@ idna==3.8                 # via requests
 oauthlib==3.2.2
 requests-oauthlib==2.0.0
 requests==2.32.3
-urllib3==1.25.9           # via requests
+urllib3==2.2.2           # via requests
 websocket-client==0.57.0
